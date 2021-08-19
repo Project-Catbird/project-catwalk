@@ -1,5 +1,8 @@
 const { url, Atelier } = require('../lib/AtelierAPI');
-let URL = url.questions;
+// let URL = url.questions;
+const SERVER = 'http://localhost:3001'
+const URL = `${SERVER}/api/qa/questions`;
+const axios = require('axios');
 
 const ERROR_MESSAGES = [
   'Unable to retrieve questions from \'/questions/list\'',
@@ -18,12 +21,12 @@ module.exports = {
       get
    - - - - - */
   list: (req, res) => {
-    Atelier.get(URL, { params: req.query })
+    axios.get(URL, { params: req.query })
       .then(response => res.status(response.status).json(response.data))
       .catch(err => res.status(404).json(ERROR_MESSAGES[0]));
   },
   answers: (req, res) => {
-    Atelier.get(`${URL}/${req.params.question_id}/answers`, { params: req.query })
+    axios.get(`${URL}/${req.params.question_id}/answers`, { params: req.query })
       .then(response => res.status(response.status).json(response.data))
       .catch(err => res.status(404).json(ERROR_MESSAGES[1]));
   },
@@ -31,12 +34,12 @@ module.exports = {
       post
    - - - - - */
   ask: (req, res) => {
-    Atelier.post(URL, req.body)
+    axios.post(URL, req.body)
       .then(response => res.status(response.status).json(response.data))
       .catch(err => res.status(404).json(ERROR_MESSAGES[2]));
   },
   answer: (req, res) => {
-    Atelier.post(`${URL}/${req.params.question_id}/answers`, req.body)
+    axios.post(`${URL}/answers/?question_id=${req.params.question_id}`, req.body)
       .then(response => res.status(response.status).json(response.data))
       .catch(err => res.status(404).json(ERROR_MESSAGES[3]));
   },
@@ -44,12 +47,12 @@ module.exports = {
       put
    - - - - - */
   helpful: (req, res) => {
-    Atelier.put(`${URL}/${req.params.question_id}/helpful`, req.body)
+    axios.put(`${URL}/${req.params.question_id}/helpful`, req.body)
       .then(response => res.status(response.status).json(response.data))
       .catch(err => res.status(404).json(ERROR_MESSAGES[4]));
   },
   report: (req, res) => {
-    Atelier.put(`${URL}/${req.params.question_id}/report`, req.body)
+    axios.put(`${URL}/${req.params.question_id}/report`, req.body)
       .then(response => res.status(response.status).json(response.data))
       .catch(err => res.status(404).json(ERROR_MESSAGES[5]));
   },

@@ -4,7 +4,7 @@
  * 	 curl "http://169.254.169.254/latest/meta-data/public-ipv4"
  */
 const axios = require('axios');
-const SERVER = '18.222.231.76';
+const SERVER = 'localhost';
 const PORT = 3000;
 const BASE_URL = `http://${SERVER}:${PORT}/api`;
 
