@@ -7,7 +7,6 @@ import { useState } from 'react';
 import '../../../dist/styles/questionsAnswers/QuestionAnswer.css';
 export default props => {
 
-
   const questions = useSelector(state => {
     return ( state.questions )
   });

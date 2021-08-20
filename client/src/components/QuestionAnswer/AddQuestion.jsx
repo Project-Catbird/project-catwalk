@@ -51,7 +51,7 @@ export default props => {
               body: data['body'],
               name: data['name'],
               email: data['email'],
-              product_id: product.productID
+              product_id: product.productID || 16060
             })
               .then(res => {
                 actions.getQuestions(dispatch, product.productID, 1, 4);
